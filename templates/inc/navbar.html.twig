@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-3">
+<div class="container">
+ <a href="/" class="navbar-brand">Emna khiari</a>
+ <button class="navbar-toggler" type="button" datatoggle="collapse" data-target="#mobile-nav">
+ <span class="navbar-toggle-icon"></span>
+ </button>
+ <div class="collapse navbar-collapse" id="mobile-nav">
+ <ul class="navbar-nav ml-auto">
+ <li class="nav-item">
+ <a href="/" class="nav-link">Home</a>
+ </li>
+ {% if app.user %}
+ <li class="nav-item">
+ <a href="{{ path('new_article')}}" class="nav-link">Ajouter article</a>
+ </li>
+ <li class="nav-item">
+ <a href="{{ path('new_category')}}" class="nav-link">Ajouter catégorie</a>
+ </li>
+ {% if is_granted('ROLE_ADMIN') %} 
+ <li class="nav-item">
+ <a href="{{ path('admin_utilisateurs')}}" class="navlink">Administration</a>
+ </li>
+ {% endif %}
+ <td>
+ <a href="/article/{{ article.id }}" class="btn btn-dark">Détails</a>
+ {% if is_granted('ROLE_EDITOR') %} 
+ <a href="/article/edit/{{ article.id }}" class="btn btndark">Modifier</a>
+ <a href="/article/delete/{{ article.id }}" class="btn btn-danger"
+ onclick="return confirm('Etesvous sûr de supprimer cet article?');">Supprimer</a>
+ {% endif %} 
+</td> 
+ {% endif %
+ {% if is_granted('ROLE_EDITOR') %} 
+ <li class="nav-item">
+ <a href="{{ path('new_article')}}" class="nav-link">Ajouter article</a>
+ </li>
+ <li class="nav-item">
+ <a href="{{ path('new_category')}}" class="nav-link">Ajouter catégorie</a>
+ </li>
+ {% endif %}
+
+ </ul>
+ </div>
+</div>
+</nav>
